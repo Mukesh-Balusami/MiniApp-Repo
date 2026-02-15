@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NoteComponent from './components/NoteComponent'
+import { API_BASE } from "./api.js";
 
 const App = () => {
 
@@ -9,7 +10,7 @@ const App = () => {
   const [modalType, setModalType] = useState(null) // create | edit | view | delete
 
   const fetchNotes = () => {
-    fetch('/api/v1/notes/all')
+    fetch(`${API_BASE}/all`)
       .then(res => res.json())
       .then(data => setNotes(data))
   }
@@ -52,7 +53,7 @@ const App = () => {
   }
 
   const handleCreate = async () => {
-    await fetch('/api/v1/notes/create', {
+    await fetch(`${API_BASE}/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -62,7 +63,7 @@ const App = () => {
   }
 
   const handleUpdate = async () => {
-    await fetch(`/api/v1/notes/edit/${selectedNote.id}`, {
+    await fetch(`${API_BASE}/edit/${selectedNote.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -72,7 +73,7 @@ const App = () => {
   }
 
   const handleDelete = async () => {
-    await fetch(`/api/v1/notes/delete/${selectedNote.id}`, {
+    await fetch(`${API_BASE}/delete/${selectedNote.id}`, {
       method: 'DELETE'
     })
     fetchNotes()
