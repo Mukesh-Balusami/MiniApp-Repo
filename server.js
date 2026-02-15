@@ -14,10 +14,12 @@ import express from 'express';
 import { db } from './db.js';
 import { notes } from './schema.js';
 import { eq } from 'drizzle-orm';
+import cors from 'cors';
 
 // Backend app is created
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+app.use(cors());
 
 // Routing initiates
 const router = express.Router();
