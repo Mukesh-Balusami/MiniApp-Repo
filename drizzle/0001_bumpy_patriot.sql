@@ -1,0 +1,1 @@
+ALTER TABLE "notes_db" RENAME TO "notes";
